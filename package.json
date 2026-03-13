@@ -1,0 +1,39 @@
+{
+  "name": "n8n-nodes-trackpod",
+  "version": "0.1.0",
+  "description": "n8n community node for the Track-POD delivery management platform",
+  "keywords": [
+    "n8n-community-node-package",
+    "track-pod",
+    "delivery",
+    "logistics"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext .ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/TrackPodApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/TrackPod/TrackPod.node.js",
+      "dist/nodes/TrackPod/TrackPodTrigger.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^14.14.37",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0",
+    "n8n-workflow": "^0.128.0",
+    "typescript": "^4.2.4",
+    "typescript-eslint": "^8.57.0"
+  }
+}
