@@ -1,8 +1,24 @@
 # n8n-nodes-trackpod
 
-Custom n8n community node for [Track-POD](https://track-pod.com) — a delivery management platform.
+This is an n8n community node. It lets you use [Track-POD](https://track-pod.com) in your n8n workflows.
 
-## What's included
+Track-POD is a delivery management platform that provides route optimization, electronic proof of delivery, and real-time driver tracking for logistics operations.
+
+[n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
+
+[Installation](#installation)  
+[Operations](#operations)  
+[Credentials](#credentials)  
+[Compatibility](#compatibility)  
+[Usage](#usage)  
+[Resources](#resources)  
+[Version history](#version-history)  
+
+## Installation
+
+Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+
+## Operations
 
 ### Action node — Track-POD
 
@@ -22,49 +38,22 @@ Custom n8n community node for [Track-POD](https://track-pod.com) — a delivery 
 | New / Updated Order | OrderCreated, OrderUpdated |
 | Deleted Order | OrderDeleted |
 
----
-
-## Setup
-
-### Prerequisites
-
-- n8n self-hosted (any recent version)
-- Node.js ≥ 16
-
-### Install & build
-
-```bash
-# From the package root
-npm install
-npm run build
-```
-
-### Link into n8n
-
-n8n loads community nodes from its custom extensions directory.
-
-```bash
-export N8N_CUSTOM_EXTENSIONS="$HOME/.n8n/custom"
-mkdir -p "$N8N_CUSTOM_EXTENSIONS"
-
-# Symlink for development — re-run `npm run build` after any code change
-ln -s "$(pwd)/dist" "$N8N_CUSTOM_EXTENSIONS/n8n-nodes-trackpod"
-```
-
-Restart n8n after linking.
-
-### Add credentials
+## Credentials
 
 1. In n8n go to **Credentials → New**.
 2. Search for **Track-POD API**.
 3. Paste your API key — find it at [Track-POD → Settings → Integrations → Web API](https://web.track-pod.com/en/settings/integrations/web-api).
 4. Click **Test** to verify, then **Save**.
 
----
+## Compatibility
 
-## Action node usage
+Tested with n8n self-hosted. Requires Node.js ≥ 16.
 
-### Get Details
+## Usage
+
+### Action node
+
+#### Get Details
 
 Looks up a single order. Returns the full order object, or an empty `{}` on 404 / 410 (order not found or deleted) rather than failing — downstream nodes can check for missing fields to branch.
 
@@ -73,7 +62,7 @@ Looks up a single order. Returns the full order object, or an empty `{}` on 404 
 | **Get By** | `Number` · `ID` · `Tracking-ID` |
 | **Order Number / Order ID / Tracking ID** | The lookup key (shown conditionally) |
 
-### Create Orders
+#### Create Orders
 
 Collects **all input items** into one array and sends them in a single `POST /order/bulk` call. Returns one output item with the API response.
 
@@ -87,7 +76,7 @@ Collects **all input items** into one array and sends them in a single `POST /or
 
 `GoodsList` and `CustomFields` in Additional Fields accept a JSON array string, e.g. `[{"GoodsName":"Item A","Quantity":2,"GoodsUnit":"pcs"}]`.
 
-### Update Order
+#### Update Order
 
 Sends `PUT /order` per input item. Include at least **ID** or **Number** in Order Fields to identify which order to update. Only the most recent matching order is updated.
 
@@ -96,7 +85,7 @@ Sends `PUT /order` per input item. Include at least **ID** or **Number** in Orde
 | **Force Update Address GPS** | Updates Lat/Lon in the Addresses directory |
 | **Order Fields** | Collection of all order fields including Id, Number, Client, Address, etc. |
 
-### Delete Order
+#### Delete Order
 
 Sends `DELETE /Order/{deleteBy}/{key}` per input item.
 
@@ -105,9 +94,7 @@ Sends `DELETE /Order/{deleteBy}/{key}` per input item.
 | **Delete By** | `Number` · `ID` |
 | **Order Number / Order ID** | The key (shown conditionally) |
 
----
-
-## Trigger node usage
+### Trigger node
 
 Add a **Track-POD Trigger** node to start a workflow from a Track-POD webhook event.
 
@@ -118,7 +105,7 @@ Add a **Track-POD Trigger** node to start a workflow from a Track-POD webhook ev
 
 Each trigger node instance has its own URL. If you need to handle multiple event types in one workflow, add one trigger node per event and register each URL separately in Track-POD.
 
-### Output structure
+#### Output structure
 
 All trigger events pass the raw Track-POD webhook payload as-is:
 
@@ -141,10 +128,16 @@ All trigger events pass the raw Track-POD webhook payload as-is:
 | New / Updated Order | Full order object (Number, Client, Address, Status, GoodsList, …) |
 | Deleted Order | `Number`, `Date`, `Type`, `Note`, `Weight`, `Volume`, `Pallets`, `COD`, `DeletedBy`, `DeletedDate` |
 
----
+## Resources
 
-## Development
+* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
+* [Track-POD API documentation](https://docs.track-pod.com)
+* [Track-POD website](https://track-pod.com)
 
-```bash
-npm run dev   # watch mode — recompiles on every save
-```
+## Version history
+
+**0.1.0** — Initial release with Order CRUD operations and webhook trigger support.
+
+## License
+
+[MIT](LICENSE.md)
