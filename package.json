@@ -12,6 +12,10 @@
     "name": "Muhammad Otah Bashi",
     "email": "muhammad.otahbashi@altruan.de"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bashlenix/Trackpod_n8n_Custom_Node.git"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
