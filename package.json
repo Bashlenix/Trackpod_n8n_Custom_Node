@@ -8,6 +8,10 @@
     "delivery",
     "logistics"
   ],
+  "author": {
+    "name": "Muhammad Otah Bashi",
+    "email": "muhammad.otahbashi@altruan.de"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
