@@ -49,6 +49,7 @@ class TrackPod {
             defaults: {
                 name: 'Track-POD',
             },
+            usableAsTool: true,
             inputs: ['main'],
             outputs: ['main'],
             credentials: [

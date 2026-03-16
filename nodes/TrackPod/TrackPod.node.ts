@@ -54,6 +54,7 @@ export class TrackPod implements INodeType {
 		defaults: {
 			name: 'Track-POD',
 		},
+		usableAsTool: true,
 		inputs: ['main'],
 		outputs: ['main'],
 		credentials: [

@@ -3,12 +3,13 @@ import {
 	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
+	Icon,
 } from 'n8n-workflow';
 
 export class TrackPodApi implements ICredentialType {
 	name = 'trackPodApi';
 	displayName = 'Track-POD API';
-    icon = 'file:trackpod.svg';
+    icon: Icon = 'file:trackpod.svg';
 	documentationUrl = 'https://app.swaggerhub.com/apis-docs/Track-POD/api/';
 
 	properties: INodeProperties[] = [
