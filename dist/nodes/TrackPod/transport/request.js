@@ -25,7 +25,6 @@ async function trackPodRequest(context, method, endpoint, body, qs) {
         ...(hasBody ? { body: body } : {}),
         returnFullResponse: true,
         ignoreHttpStatusErrors: true,
-        skipSslCertificateValidation: true,
     };
     let response;
     try {

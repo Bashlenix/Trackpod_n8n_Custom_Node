@@ -30,7 +30,6 @@ class TrackPodApi {
             request: {
                 baseURL: 'https://api.track-pod.com',
                 url: '/Test',
-                skipSslCertificateValidation: true,
             },
         };
     }

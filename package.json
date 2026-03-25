@@ -35,6 +35,9 @@
       "dist/nodes/TrackPod/TrackPodTrigger.node.js"
     ]
   },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^14.14.37",

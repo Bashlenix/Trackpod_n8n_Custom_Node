@@ -38,7 +38,6 @@ export async function trackPodRequest(
 		...(hasBody ? { body: body as IDataObject } : {}),
 		returnFullResponse: true,
 		ignoreHttpStatusErrors: true,
-		skipSslCertificateValidation: true,
 	};
 
 	let response: IN8nHttpFullResponse;
